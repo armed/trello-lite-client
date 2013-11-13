@@ -2,7 +2,7 @@ var trello = require('../src/trello')
 var request = require('request')
 
 function t() {
-  url = '';
+  var url = '';
   if (arguments.length) {
     url = Array.prototype.slice.call(arguments).join('');
   }
