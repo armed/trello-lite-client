@@ -14,7 +14,7 @@ var Client, Proxy;
 
 function appendKeys (u) {
   if (!this.opts) {
-    return;
+    return u;
   }
 
   if (~u.indexOf('?')) {
@@ -84,7 +84,6 @@ _.extend(Proxy.prototype, {
     var u = this._createBoardUrl(req.params.idBoard, 'lists?fields=name');
     proxify(req, res, u);
   },
-  // Список всех карточек в борде
   getCardsInBoard: function (req, res) {
     var u = this._createBoardUrl(req.params.idBoard, 'cards' + CARD_FIELDS);
     proxify(req, res, u);
@@ -93,23 +92,16 @@ _.extend(Proxy.prototype, {
     var u = this.appendKeys(urljoin(LISTS, req.params.idList, 'cards', CARD_FIELDS));
     proxify(req, res, u);
   },
-  // Данные конкретной карточки
   getCard: function (req, res) {
     var p = req.params;
     var u = this._createBoardUrl(p.idBoard, urljoin('cards/' + p.idShort,
       '?actions=createCard,addAttachmentToCard,commentCard,updateCard'));
     proxify(req, res, u);
   },
-  // Создание карточки
   createCard: function (req, res) {
     var u = this.appendKeys(CARDS);
     proxify(req, res, { url: u, json: req.body });
   },
-  // Установка приоритета у карточки (присвоение лейбла определенного цвета)
-  // красный - Аварийный,
-  // оранжевый - Серьезный,
-  // синий - Обычный,
-  // зеленый - Незначительный
   setCardLabel: function (req, res) {
     var u = this.appendKeys(urljoin(CARDS, req.params.idCard, 'labels'));
     proxify(req, res, { url: u, json: req.body });
