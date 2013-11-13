@@ -25,6 +25,9 @@ function appendKeys (u) {
   return u + 'key=' + this.opts.apiKey + '&token=' + this.opts.token;
 }
 
+/**
+ * Client contains notification methods
+ */
 module.exports.Client = Client = function (opts) {
   if (!(this instanceof Client)) return new Client(opts);
   this.opts = opts;
@@ -58,6 +61,10 @@ _.extend(Client.prototype, {
   appendKeys: appendKeys
 });
 
+/**
+ * Proxy is a very thin wrapper over Trello API.
+ * All responses passed to browser without modifications.
+ */
 module.exports.Proxy = Proxy = function (opts) {
   if (!(this instanceof Proxy)) return new Proxy(opts);
   this.opts = opts;

@@ -6,12 +6,12 @@
   "author": "Artem Medeusheyev <artem.medeusheyev@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "~3.4.4",
-    "markdown": "~0.4.0",
-    "url-join": "0.0.1",
+    "express": "3.x",
+    "markdown": "*",
+    "url-join": "*",
     "request": "*",
-    "moment": "~2.0.0",
-    "lodash": "~1.2.1"
+    "moment": "*",
+    "lodash": "*"
   },
   "engines": {
     "node": "0.10.x",
