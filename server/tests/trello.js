@@ -1,6 +1,14 @@
 var trello = require('../src/trello')
 var request = require('request')
 
+function t() {
+  url = '';
+  if (arguments.length) {
+    url = Array.prototype.slice.call(arguments).join('');
+  }
+  return 'https://api.trello.com/1/' + url;
+}
+
 var tests = module.exports = {
   setUp: function (callback) {
     this.opts = { apiKey: 'someKey', organization: 'MyORG', token: 'tok' };
@@ -119,14 +127,14 @@ tests.proxy = {
 
   createBoardUrl: function (test) {
     var u = this.p._createBoardUrl(123, 'members');
-    test.strictEqual(u, 'https://api.trello.com/1/boards/123/members?key=someKey&token=tok');
+    test.strictEqual(u, t('boards/123/members?key=someKey&token=tok'));
     test.done();
   },
 
   createCommentsUrl: function (test) {
     var u = this.p._createCommentsUrl(123);
-    test.strictEqual(u, 'https://api.trello.com/1/cards/123/actions?filter=commentCard,' +
-      'updateCard:idList,createCard&key=someKey&token=tok');
+    test.strictEqual(u, t('cards/123/actions?filter=commentCard,',
+      'updateCard:idList,createCard&key=someKey&token=tok'));
     test.done();
   },
 
@@ -134,8 +142,7 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/organizations/MyORG/members?key=someKey&token=tok');
+      test.strictEqual(url, t('organizations/MyORG/members?key=someKey&token=tok'));
       test.done();
     }
 
@@ -146,9 +153,8 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/organizations/MyORG/boards?fields=name,desc&' +
-        'filter=open&key=someKey&token=tok');
+      test.strictEqual(url, t('organizations/MyORG/boards?fields=name,desc&',
+        'filter=open&key=someKey&token=tok'));
       test.done();
     }
 
@@ -159,8 +165,7 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/boards/123/lists?fields=name&key=someKey&token=tok');
+      test.strictEqual(url, t('boards/123/lists?fields=name&key=someKey&token=tok'));
       test.done();
     }
 
@@ -173,9 +178,8 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/boards/123/cards?fields=name,idList,idShort,labels,' +
-        'dateLastActivity&actions=createCard&key=someKey&token=tok');
+      test.strictEqual(url, t('boards/123/cards?fields=name,idList,idShort,labels,',
+        'dateLastActivity&actions=createCard&key=someKey&token=tok'));
       test.done();
     }
 
@@ -188,9 +192,8 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/lists/listId123/cards?fields=name,idList,idShort,labels,' +
-        'dateLastActivity&actions=createCard&key=someKey&token=tok');
+      test.strictEqual(url, t('lists/listId123/cards?fields=name,idList,idShort,labels,',
+        'dateLastActivity&actions=createCard&key=someKey&token=tok'));
       test.done();
     }
 
@@ -203,9 +206,8 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/boards/board123/cards/short123?actions=createCard,' +
-        'addAttachmentToCard,commentCard,updateCard&key=someKey&token=tok');
+      test.strictEqual(url, t('boards/board123/cards/short123?actions=createCard,',
+        'addAttachmentToCard,commentCard,updateCard&key=someKey&token=tok'));
       test.done();
     }
 
@@ -221,8 +223,7 @@ tests.proxy = {
     var body = this.rr.body = '{ "some": "body" }';
 
     request.post = function (params) {
-      test.strictEqual(params.url,
-        'https://api.trello.com/1/cards?key=someKey&token=tok');
+      test.strictEqual(params.url, t('cards?key=someKey&token=tok'));
       test.strictEqual(params.json, body);
       test.done();
     }
@@ -241,8 +242,7 @@ tests.proxy = {
     var body = this.rr.body = '{ "some": "body" }';
 
     request.post = function (params) {
-      test.strictEqual(params.url,
-        'https://api.trello.com/1/cards/card123/labels?key=someKey&token=tok');
+      test.strictEqual(params.url, t('cards/card123/labels?key=someKey&token=tok'));
       test.strictEqual(params.json, body);
       test.done();
     }
@@ -261,8 +261,7 @@ tests.proxy = {
     var body = this.rr.body = '{ "some": "body" }';
 
     request.post = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/cards/card123/attachments?key=someKey&token=tok');
+      test.strictEqual(url, t('cards/card123/attachments?key=someKey&token=tok'));
       test.done();
     }
 
@@ -273,9 +272,8 @@ tests.proxy = {
     test.expect(1);
 
     request.get = function (url) {
-      test.strictEqual(url,
-        'https://api.trello.com/1/cards/card123/actions?filter=commentCard,' +
-        'updateCard:idList,createCard&key=someKey&token=tok');
+      test.strictEqual(url, t('cards/card123/actions?filter=commentCard,',
+        'updateCard:idList,createCard&key=someKey&token=tok'));
       test.done();
     }
 
@@ -292,8 +290,7 @@ tests.proxy = {
     var body = this.rr.body = '{ "some": "body" }';
 
     request.post = function (params) {
-      test.strictEqual(params.url,
-        'https://api.trello.com/1/cards/card123/actions/comments?key=someKey&token=tok');
+      test.strictEqual(params.url, t('cards/card123/actions/comments?key=someKey&token=tok'));
       test.strictEqual(params.json, body);
       test.done();
     }
