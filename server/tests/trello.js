@@ -1,5 +1,5 @@
-var trello = require('../src/trello')
-var request = require('request')
+var trello = require('../src/trello');
+var request = require('request');
 
 function t() {
   var url = '';
@@ -21,7 +21,7 @@ var tests = module.exports = {
     request.post = this._post;
     callback();
   }
-}
+};
 
 tests.client = {
 
@@ -38,7 +38,7 @@ tests.client = {
       'appendKeys to parameterless url');
     test.strictEqual(c.appendKeys('http://test.com?data=123'),
       'http://test.com?data=123&key=someKey&token=tok', 'appedKeys to url with params');
-    test.done()
+    test.done();
   },
 
   getNotifications: function (test) {
@@ -50,30 +50,30 @@ tests.client = {
 
     request.get = function (url, cb) {
       cb(new Error('some err'));
-    }
+    };
 
     c.getNotifications(function (err, data) {
       test.ok(err, 'it should pass error');
-    })
+    });
 
     request.get = function (url, cb) {
       cb(null, { statusCode: 200 }, '{ "hello": "world" }');
-    }
+    };
 
     c.getNotifications(function (err, data) {
       test.equal(err, null, 'error should be null');
       test.strictEqual(data.hello, 'world', 'data');
-    })
+    });
 
     request.get = function (url, cb) {
       cb(null, { statusCode: 300 });
-    }
+    };
 
     c.getNotifications(function (err, data) {
       test.ok(err, 'it should pass error');
       test.strictEqual(err.message, 'failed to access trello.com: 300', 'error message');
       test.done();
-    })
+    });
 
     request.get = _get;
   },
@@ -92,7 +92,7 @@ tests.client = {
     c.markNotificationsAsRead(function (err, status) {
       test.equal(err, null, 'no error');
       test.equal(status, 200, 'status code');
-    })
+    });
 
     request.post = function (url, callback) {
       callback(new Error('request error'));
@@ -102,7 +102,7 @@ tests.client = {
       test.ok(err, 'should be error');
       test.equal(err.message, 'request error');
       test.done();
-    })
+    });
 
     request.post = _post;
   }
@@ -116,7 +116,7 @@ tests.proxy = {
       pipe: function () {
         return this;
       }
-    }
+    };
     callback();
   },
 
@@ -144,7 +144,7 @@ tests.proxy = {
     request.get = function (url) {
       test.strictEqual(url, t('organizations/MyORG/members?key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.p.getMembers(this.rr, this.rr);
   },
@@ -156,7 +156,7 @@ tests.proxy = {
       test.strictEqual(url, t('organizations/MyORG/boards?fields=name,desc&',
         'filter=open&key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.p.getBoards(this.rr, this.rr);
   },
@@ -167,7 +167,7 @@ tests.proxy = {
     request.get = function (url) {
       test.strictEqual(url, t('boards/123/lists?fields=name&key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.rr.params = { idBoard: 123 };
 
@@ -181,7 +181,7 @@ tests.proxy = {
       test.strictEqual(url, t('boards/123/cards?fields=name,idList,idShort,labels,',
         'dateLastActivity&actions=createCard&key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.rr.params = { idBoard: 123 };
 
@@ -195,7 +195,7 @@ tests.proxy = {
       test.strictEqual(url, t('lists/listId123/cards?fields=name,idList,idShort,labels,',
         'dateLastActivity&actions=createCard&key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.rr.params = { idList: 'listId123' };
 
@@ -209,7 +209,7 @@ tests.proxy = {
       test.strictEqual(url, t('boards/board123/cards/short123?actions=createCard,',
         'addAttachmentToCard,commentCard,updateCard&key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.rr.params = { idBoard: 'board123', idShort: 'short123' };
 
@@ -226,7 +226,7 @@ tests.proxy = {
       test.strictEqual(params.url, t('cards?key=someKey&token=tok'));
       test.strictEqual(params.json, body);
       test.done();
-    }
+    };
 
     this.p.createCard(this.rr, this.rr);
   },
@@ -245,7 +245,7 @@ tests.proxy = {
       test.strictEqual(params.url, t('cards/card123/labels?key=someKey&token=tok'));
       test.strictEqual(params.json, body);
       test.done();
-    }
+    };
 
     this.p.setCardLabel(this.rr, this.rr);
   },
@@ -263,7 +263,7 @@ tests.proxy = {
     request.post = function (url) {
       test.strictEqual(url, t('cards/card123/attachments?key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.p.addAttachment(this.rr, this.rr);
   },
@@ -275,7 +275,7 @@ tests.proxy = {
       test.strictEqual(url, t('cards/card123/actions?filter=commentCard,',
         'updateCard:idList,createCard&key=someKey&token=tok'));
       test.done();
-    }
+    };
 
     this.rr.params = { idCard: 'card123' };
 
@@ -293,7 +293,7 @@ tests.proxy = {
       test.strictEqual(params.url, t('cards/card123/actions/comments?key=someKey&token=tok'));
       test.strictEqual(params.json, body);
       test.done();
-    }
+    };
 
     this.p.postCardComment(this.rr, this.rr);
   }

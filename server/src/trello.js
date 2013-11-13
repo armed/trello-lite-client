@@ -23,7 +23,7 @@ function appendKeys (u) {
     u += '?';
   }
   return u + 'key=' + this.opts.apiKey + '&token=' + this.opts.token;
-};
+}
 
 module.exports.Client = Client = function (opts) {
   if (!(this instanceof Client)) return new Client(opts);
@@ -61,7 +61,7 @@ _.extend(Client.prototype, {
 module.exports.Proxy = Proxy = function (opts) {
   if (!(this instanceof Proxy)) return new Proxy(opts);
   this.opts = opts;
-}
+};
 _.extend(Proxy.prototype, {
   _createBoardUrl: function (idBoard, qs) {
     return this.appendKeys(urljoin(BOARDS, idBoard, qs));
