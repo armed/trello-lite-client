@@ -26,22 +26,22 @@ html(lang='en', ng-app='trelloLite')
           .nav-collapse.collapse
             ul.nav
               li.active
-                a(href='#') Запросы
+                a(href='#') Issues
             .version-checker
             ul.nav.pull-right
               li
                 p.navbar-text(id='user-login')= user
               li
-                a(href='#', ng-click='logout()') Выход
+                a(href='#', ng-click='logout()') Exit
 
 
     .container-fluid
       .row-fluid
         .span3
           .well.well-small.sidebar-nav
-            span(ng-show='!products.length') Загрузка продуктов...
+            span(ng-show='!products.length') Loading products...
             ul.nav.nav-list(ng-show='products.length > 0')
-              li.nav-header(ng-show='products.length') Выберите продукт
+              li.nav-header(ng-show='products.length') Choose product
               li.divider
               li(ng-repeat='product in products',
                 ng-class='{ active: isSelected(product.id) }')
