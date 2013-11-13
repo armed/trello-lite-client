@@ -1,0 +1,62 @@
+!!!
+html(lang='en', ng-app='trelloLite')
+  head
+    meta(charset='utf-8')
+    title Trello Lite Client
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='Trello Lite Client')
+    meta(name='author', content='Artem Medeusheyev <artem.medeusheyev@gmail.com>')
+
+    link(href='/public/dist/css/bootstrap.min.css', rel='stylesheet')
+
+    style.
+      body {
+        padding-top: 60px;
+      }
+
+  body(ng-controller='MainCtrl', ng-cloak)
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='#') Trello Lite
+          .nav-collapse.collapse
+            ul.nav
+              li.active
+                a(href='#') Запросы
+            .version-checker
+            ul.nav.pull-right
+              li
+                p.navbar-text(id='user-login')= user
+              li
+                a(href='#', ng-click='logout()') Выход
+
+
+    .container-fluid
+      .row-fluid
+        .span3
+          .well.well-small.sidebar-nav
+            span(ng-show='!products.length') Загрузка продуктов...
+            ul.nav.nav-list(ng-show='products.length > 0')
+              li.nav-header(ng-show='products.length') Выберите продукт
+              li.divider
+              li(ng-repeat='product in products',
+                ng-class='{ active: isSelected(product.id) }')
+                a(href='/products/{{product.id}}/issues') {{product.name}}
+        .span9(ng-view)
+
+    .notifications.top-right
+
+  if dev
+    //- vendor scripts
+    script(src='/public/vendor/jquery/jquery.js')
+    script(src='/public/vendor/bootstrap/dist/js/bootstrap.js')
+    script(src='/public/vendor/angular/angular.js')
+    //- app scripts
+    script(src='/public/src/app.js?v=#{version}')
+  else
+    script(src='/public/dist/js/vendor.min.js?v=#{version}')
+    script(src='/public/dist/js/app.min.js?v=#{version}')
