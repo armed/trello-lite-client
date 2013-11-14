@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     },
     jshint: {
       grunt: 'gruntfile.js',
-      app: 'src/**/*.js',
+      app: ['src/**/*.js', 'config.js', 'server.js'],
       test: 'tests/**/*.js'
     }
   });
