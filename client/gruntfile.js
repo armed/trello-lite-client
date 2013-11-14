@@ -10,26 +10,38 @@ module.exports = function (grunt) {
           {
             src: '<%= vendorFonts %>',
             dest: '<%= buildDir %>/fonts',
-            cwd: '.',
             expand: true,
             flatten: true
           },
           {
             src: '<%= vendorCss %>',
             dest: '<%= buildDir %>/css',
-            cwd: '.',
+            expand: true,
+            flatten: true
+          },
+          {
+            src: '<%= vendorDevJs %>',
+            dest: '<%= buildDir %>/js/',
+            expand: true,
+            flatten: true
+          }
+        ]
+      },
+      app: {
+        files: [
+          {
+            src: '<%= appCss %>',
+            dest: '<%= buildDir %>/css',
             expand: true,
             flatten: true
           }
         ]
       }
     },
-
     // clean dist folder
     clean: {
       dist: '<%= buildDir %>'
     },
-
     // concat js files
     concat: {
       options: {
@@ -44,7 +56,6 @@ module.exports = function (grunt) {
         dest: '<%= buildDir %>/js/app.js'
       }
     },
-
     jshint: {
       options: {
         globals: {
@@ -56,14 +67,28 @@ module.exports = function (grunt) {
       grunt: ['gruntfile.js'],
       app: ['src/**/*.js']
     },
-
     // compile jade templates
     jade: {
       dev: {
         options: {
           data: { dev: true, version: Number(new Date()) }
         },
-        files: '<%= htmlFiles %>'
+        files: [
+          {
+            src: '<%= htmlFiles %>',
+            dest: '<%= buildDir %>',
+            expand: true,
+            flatten: true,
+            ext: '.html'
+          },
+          {
+            src: '<%= partials %>',
+            dest: '<%= buildDir %>/partials',
+            expand: true,
+            flatten: true,
+            ext: '.tpl.html'
+          }
+        ]
       },
       prod: {
         options: {
@@ -72,13 +97,22 @@ module.exports = function (grunt) {
         files: '<%= htmlFiles %>'
       }
     },
-
     // uglify code
     uglify: {
       appJs: {
         files: {
           '<%= buildDir %>/js/app.min.js': '<%= concat.appJs.dest %>'
         }
+      }
+    },
+    // watch and rebuild
+    watch: {
+      src: {
+        files: ['src/**/*.*', './*.js'],
+        tasks: ['default'],
+        options: {
+          interrupt: true,
+        },
       }
     }
   });
@@ -92,7 +126,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'copy', 'concat', 'jade:dev']);
+  grunt.registerTask('default', ['jshint', 'clean', 'copy', 'concat:appJs', 'jade:dev']);
   grunt.registerTask('prod', ['jshint', 'clean', 'copy', 'concat', 'jade:prod', 'uglify']);
 };

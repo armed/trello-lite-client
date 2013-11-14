@@ -10,7 +10,17 @@ module.exports = {
   vendorJs: [
     vendorFile('jquery.min.js'),
     vendorFile('bootstrap.min.js'),
-    vendorFile('angular.min.js')
+    vendorFile('angular.min.js'),
+    vendorFile('angular-route.min.js'),
+    vendorFile('angular-sanitize.min.js')
+  ],
+
+  vendorDevJs: [
+    vendorFile('jquery.js'),
+    vendorFile('bootstrap.js'),
+    vendorFile('angular.js'),
+    vendorFile('angular-route.js'),
+    vendorFile('angular-sanitize.js')
   ],
 
   vendorCss: [
@@ -21,9 +31,13 @@ module.exports = {
     vendorFile('glyphicons-halflings-regular.*')
   ],
 
-  htmlFiles: {
-    '<%= buildDir %>/index.html': 'src/index.jade'
-  },
+  htmlFiles: [
+    'src/index.jade'
+  ],
+
+  partials: [
+    'src/**/*.tpl.jade'
+  ],
 
   appJs: 'src/**/*.js',
 
@@ -31,5 +45,7 @@ module.exports = {
     'app.prefix',
     '<%= appJs %>',
     'app.suffix'
-  ]
+  ],
+
+  appCss: 'src/css/**/*.css'
 };

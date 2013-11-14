@@ -7,7 +7,8 @@ html(lang='en', ng-app='trelloLite')
     meta(name='description', content='Trello Lite Client')
     meta(name='author', content='Artem Medeusheyev <artem.medeusheyev@gmail.com>')
 
-    link(href='/public/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/assets/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/assets/css/app.css', rel='stylesheet')
 
     style.
       body {
@@ -15,30 +16,31 @@ html(lang='en', ng-app='trelloLite')
       }
 
   body(ng-controller='MainCtrl', ng-cloak)
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+    header.navbar.navbar-default.navbar-fixed-top(role='banner')
+      .container
+        .navbar-header
+          button.navbar-toggle(data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.brand(href='#') Trello Lite
-          .nav-collapse.collapse
-            ul.nav
-              li.active
-                a(href='#') Issues
-            .version-checker
-            ul.nav.pull-right
-              li
-                p.navbar-text(id='user-login')= user
-              li
-                a(href='#', ng-click='logout()') Exit
+          a.navbar-brand(href='#') Trello Lite
+        .collapse.navbar-collapse(role='navigation')
+          ul.nav.navbar-nav
+            li.active
+              a(href='#') Issues
+          .version-checker
+          ul.nav.navbar-nav.navbar-right
+            li
+              p.navbar-text(id='user-login')= user
+            li
+              a(href='#', ng-click='logout()') Exit
 
 
-    .container-fluid
-      .row-fluid
-        .span3
-          .well.well-small.sidebar-nav
+    .container
+      .row
+        .col-md-3
+          .well
             span(ng-show='!products.length') Loading products...
             ul.nav.nav-list(ng-show='products.length > 0')
               li.nav-header(ng-show='products.length') Choose product
@@ -46,17 +48,19 @@ html(lang='en', ng-app='trelloLite')
               li(ng-repeat='product in products',
                 ng-class='{ active: isSelected(product.id) }')
                 a(href='/products/{{product.id}}/issues') {{product.name}}
-        .span9(ng-view)
+        .col-md-9(ng-view)
 
     .notifications.top-right
 
   if dev
     //- vendor scripts
-    script(src='/public/vendor/jquery/jquery.js')
-    script(src='/public/vendor/bootstrap/dist/js/bootstrap.js')
-    script(src='/public/vendor/angular/angular.js')
+    script(src='/assets/js/jquery.js')
+    script(src='/assets/js/bootstrap.js')
+    script(src='/assets/js/angular.js')
+    script(src='/assets/js/angular-route.js')
+    script(src='/assets/js/angular-sanitize.js')
     //- app scripts
-    script(src='/public/src/app.js?v=#{version}')
+    script(src='/assets/js/app.js?v=#{version}')
   else
-    script(src='/public/dist/js/vendor.min.js?v=#{version}')
-    script(src='/public/dist/js/app.min.js?v=#{version}')
+    script(src='/assets/js/vendor.min.js?v=#{version}')
+    script(src='/assets/js/app.min.js?v=#{version}')
