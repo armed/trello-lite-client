@@ -40,12 +40,11 @@ html(lang='en', ng-app='trelloLite')
     .container
       .row
         .col-md-3
-          .well
-            span(ng-show='!products.length') Loading products...
-            ul.nav.nav-list(ng-show='products.length > 0')
-              li(ng-repeat='product in products',
-                ng-class='{ active: isSelected(product.id) }')
-                a(href='/products/{{product.id}}/issues') {{product.name}}
+          span(ng-show='!products.length') Loading products...
+          ul.side-nav.nav.nav-pills.nav-stacked(ng-show='products.length > 0')
+            li(ng-repeat='product in products',
+              ng-class='{ active: isSelected(product.id) }')
+              a(href='/products/{{product.id}}/issues') {{product.name}}
         .col-md-9(ng-view)
 
     .notifications.top-right

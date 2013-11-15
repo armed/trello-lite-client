@@ -1,0 +1,168 @@
+@commenter-anim: height ease-in-out 85ms;
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none;
+}
+
+/* filter panel */
+.issue-filter {
+  float: left;
+  form {
+    margin-bottom: 0;
+  }
+  label {
+    margin-right: 10px;
+    &:first-child {
+      font-weight: bold;
+      margin-right: 15px;
+    }
+  }
+  select, input[type="text"] {
+    width: 120px;
+  }
+}
+
+/* comments */
+.comments {
+  margin: 0 0 10px 0;
+  border: 1px #ddd solid;
+  padding: 8px;
+  border-radius: 4px;
+  .member {
+    font-weight: bold;
+  }
+  .time {
+    margin-left: 10px;
+    font-weight: normal;
+    font-size: .9em;
+  }
+  .text {
+    border: none;
+    border-radius: 0;
+    font: inherit;
+    padding-top: 10px;
+    border-top: 1px solid #cfcfcf;
+  }
+}
+
+.system {
+  color: gray;
+ .small {
+    font-size: smaller;
+  }
+}
+
+.commenter-input {
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+  border-bottom-color: #bbb;
+  box-shadow: 0 1px 3px #D3D3D3;
+  color: #939393;
+  height: 36px;
+  transition: @commenter-anim;
+}
+
+.commenter-submit {
+  display: none;
+}
+
+.commenter {
+  height: 40px;
+  transition: @commenter-anim;
+  margin-bottom: 10px;
+  .focus {
+    height: 140px;
+    .commenter-input {
+      height: 90px;
+      color: #393939;
+      cursor: text;
+    }
+    .commenter-submit {
+      display: inline-block;
+    }
+  }
+}
+
+.attachment {
+  background-color: #d3d3d3;
+  display: table;
+  padding: 4px;
+  border-radius: 3px;
+  float: left;
+  margin-right: 4px;
+}
+
+/* issue list */
+.issue-controls {
+  margin-bottom: 5px;
+}
+
+.issue-links {
+  padding-top: 15px;
+  text-align: right;
+}
+
+.priority {
+  margin-top: 3px;
+  float: left;
+  padding: 1px 3px 3px;
+  &:hover {
+    cursor: pointer;
+  }
+  .active {
+    .label:before {
+      content: "✔ ";
+    }
+  }
+}
+
+/* issue */
+.issue {
+  td {
+    text-align: center;
+  }
+  .issue-desc {
+    text-align: left;
+  }
+  .issue-header {
+    th {
+      text-align: center;
+    }
+    .issue-number {
+      width: 90px;
+    }
+    .issue-status {
+      width: 180px;
+    }
+    .issue-priority {
+      width: 120px;
+    }
+    .issue-create-date {
+      width: 140px;
+    }
+  }
+  .issue-body {
+    font-family: inherit;
+    font-size: 1.1em;
+  }
+}
+
+/* notifications */
+.notifications {
+  .top-right {
+    right: 10px;
+    top: 45px;
+  }
+}
+
+.version-checker {
+  margin: 1px;
+  height: 20px;
+  float: left;
+  display: none;
+}

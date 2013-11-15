@@ -51,5 +51,5 @@ module.exports = {
     'app.suffix'
   ],
 
-  appCss: 'src/css/**/*.css'
+  appLess: 'src/css/**/*.less'
 };

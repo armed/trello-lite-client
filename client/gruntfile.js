@@ -26,16 +26,22 @@ module.exports = function (grunt) {
             flatten: true
           }
         ]
+      }
+    },
+    // less
+    less: {
+      dev: {
+        files: {
+          '<%= buildDir %>/css/app.css': '<%= appLess %>'
+        }
       },
-      app: {
-        files: [
-          {
-            src: '<%= appCss %>',
-            dest: '<%= buildDir %>/css',
-            expand: true,
-            flatten: true
-          }
-        ]
+      prod: {
+        options: {
+          cleancss: true
+        },
+        files: {
+          '<%= buildDir %>/css/app.min.css': '<%= appLess %>'
+        }
       }
     },
     // clean dist folder
@@ -120,6 +126,7 @@ module.exports = function (grunt) {
   grunt.initConfig(config);
 
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -128,6 +135,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'copy', 'concat', 'jade:dev']);
-  grunt.registerTask('prod', ['jshint', 'clean', 'copy', 'concat', 'jade:prod', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'clean', 'copy',
+    'less:dev', 'concat', 'jade:dev']);
+  grunt.registerTask('prod', ['jshint', 'clean', 'copy',
+    'less:prod', 'concat', 'jade:prod', 'uglify']);
 };
