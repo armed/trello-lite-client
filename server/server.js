@@ -6,6 +6,7 @@ app.use(express.cookieParser())
   .use(express.cookieSession({ secret: config.server.cookieSecret }))
   .use(express.json())
   .use(express.urlencoded())
+  .use(express.compress())
   .use('/assets', express.static(config.client.dist))
   .use('/partials', express.static(config.client.partials))
   .use(app.router);
