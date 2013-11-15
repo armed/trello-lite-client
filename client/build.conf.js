@@ -1,5 +1,21 @@
+var libs = [
+  'lodash',
+  'jquery',
+  'moment',
+  'bootstrap',
+  'angular',
+  'angular-route',
+  'angular-sanitize'
+];
+
 function vendorFile (file) {
   return 'vendor/**/' + file;
+}
+
+function vendorLibs (ext) {
+  return libs.map(function (l) {
+    return vendorFile(l + ext);
+  });
 }
 
 module.exports = {
@@ -7,21 +23,9 @@ module.exports = {
 
   pkg: require('./package.json'),
 
-  vendorJs: [
-    vendorFile('jquery.min.js'),
-    vendorFile('bootstrap.min.js'),
-    vendorFile('angular.min.js'),
-    vendorFile('angular-route.min.js'),
-    vendorFile('angular-sanitize.min.js')
-  ],
+  vendorJs: vendorLibs('.min.js'),
 
-  vendorDevJs: [
-    vendorFile('jquery.js'),
-    vendorFile('bootstrap.js'),
-    vendorFile('angular.js'),
-    vendorFile('angular-route.js'),
-    vendorFile('angular-sanitize.js')
-  ],
+  vendorDevJs: vendorLibs('.js'),
 
   vendorCss: [
     vendorFile('bootstrap.min.css')

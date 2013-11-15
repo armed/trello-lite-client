@@ -1,18 +1,15 @@
 angular.module('trelloLite').service('Members', Members);
 
-function Members () {
-  var memberCache = {};
+Members.$inject = ['Resolver', '$cacheFactory'];
+function Members (Resolver, $cacheFactory) {
+  var memCache = $cacheFactory('Members'),
+      members = [];
 
   return {
-    members: [],
+    members: members,
+    resolve: Resolver.newResolver(members, memCache, '/api/members'),
     memberById: function (memberId) {
-
-      if (!memberCache[memberId]) {
-        memberCache[memberId] = _.find(this.members, function (member) {
-          return member.id === memberId;
-        });
-      }
-      return memberCache[memberId];
+      return memCache.get(memberId) || '';
     }
   };
 }

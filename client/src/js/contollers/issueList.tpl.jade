@@ -1,0 +1,31 @@
+div.issue-controls
+  div.issue-filter
+    form.form-inline
+      label Filters&nbsp;&nbsp;
+      label.control-label(for='statuses') by status:&nbsp;
+        select(name='statuses', ng-model='search.status',
+          ng-options='s.name for s in util.statuses()')
+          option(value='') Any
+      label.control-label(for='number') by number:&nbsp;
+        input(type='text', ng-model='search.number')
+  div.issue-links
+    a(href='issues/create') New issue...
+div(ng-show='loading') Loading issues...
+div(ng-show='isEmpty()') No issues
+div(ng-show='!loading && issues.length > 0')
+  table.table.table-bordered.table-condensed.table-striped
+    tr.issue-header
+      th.issue-number #
+      th.issue-desc Description
+      th.issue-status Status
+      th.issue-priority Priority
+      th.issue-create-date Created
+    tr.issue(ng-repeat='issue in issues | filter:checkFilters | orderBy:"idShort":true')
+      td.issue-number {{issueId(issue)}}
+      td.issue-desc
+       a(href='issues/{{issue.idShort}}') {{issue.name}}
+      td.issue-status {{util.issueStatus(issue)}}
+      td.issue-create-date
+        span.label(ng-class='util.issuePriorityClass(issue)')
+          | {{util.issuePriorityName(issue)}}
+      td {{util.issueSimpleDate(issue)}}

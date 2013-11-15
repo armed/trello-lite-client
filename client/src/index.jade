@@ -43,8 +43,6 @@ html(lang='en', ng-app='trelloLite')
           .well
             span(ng-show='!products.length') Loading products...
             ul.nav.nav-list(ng-show='products.length > 0')
-              li.nav-header(ng-show='products.length') Choose product
-              li.divider
               li(ng-repeat='product in products',
                 ng-class='{ active: isSelected(product.id) }')
                 a(href='/products/{{product.id}}/issues') {{product.name}}
@@ -52,15 +50,9 @@ html(lang='en', ng-app='trelloLite')
 
     .notifications.top-right
 
+  script(src='/assets/js/vendor.min.js?v=#{version}')
+
   if dev
-    //- vendor scripts
-    script(src='/assets/js/jquery.js')
-    script(src='/assets/js/bootstrap.js')
-    script(src='/assets/js/angular.js')
-    script(src='/assets/js/angular-route.js')
-    script(src='/assets/js/angular-sanitize.js')
-    //- app scripts
     script(src='/assets/js/app.js?v=#{version}')
   else
-    script(src='/assets/js/vendor.min.js?v=#{version}')
     script(src='/assets/js/app.min.js?v=#{version}')

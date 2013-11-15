@@ -128,6 +128,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'copy', 'concat:appJs', 'jade:dev']);
+  grunt.registerTask('default', ['jshint', 'clean', 'copy', 'concat', 'jade:dev']);
   grunt.registerTask('prod', ['jshint', 'clean', 'copy', 'concat', 'jade:prod', 'uglify']);
 };
