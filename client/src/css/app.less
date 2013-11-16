@@ -47,6 +47,7 @@
     font: inherit;
     padding-top: 10px;
     border-top: 1px solid #cfcfcf;
+    word-break: break-word;
   }
 }
 
@@ -64,18 +65,21 @@
   box-shadow: 0 1px 3px #D3D3D3;
   color: #939393;
   height: 36px;
+  width: 100%;
   transition: @commenter-anim;
 }
 
 .commenter-submit {
+  margin-top: 4px;
   display: none;
 }
 
 .commenter {
   height: 40px;
   transition: @commenter-anim;
-  margin-bottom: 10px;
-  .focus {
+  margin-top: 10px;
+  margin-bottom: 4px;
+  &.focus {
     height: 140px;
     .commenter-input {
       height: 90px;
@@ -129,26 +133,29 @@
   .issue-desc {
     text-align: left;
   }
-  .issue-header {
-    th {
-      text-align: center;
-    }
-    .issue-number {
-      width: 90px;
-    }
-    .issue-status {
-      width: 180px;
-    }
-    .issue-priority {
-      width: 120px;
-    }
-    .issue-create-date {
-      width: 140px;
-    }
+}
+
+.issue-body {
+  font-family: inherit;
+  font-size: 1.1em;
+  word-break: break-word;
+}
+
+.issue-header {
+  th {
+    text-align: center;
   }
-  .issue-body {
-    font-family: inherit;
-    font-size: 1.1em;
+  .issue-number {
+    width: 90px;
+  }
+  .issue-status {
+    width: 180px;
+  }
+  .issue-priority {
+    width: 120px;
+  }
+  .issue-create-date {
+    width: 140px;
   }
 }
 

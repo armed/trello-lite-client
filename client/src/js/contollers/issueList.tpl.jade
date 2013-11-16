@@ -1,12 +1,12 @@
 div.issue-controls
   div.issue-filter
     form.form-inline
-      label.control-label(for='statuses') Status:&nbsp;
-        select(name='statuses', ng-model='search.status',
+      label.control-label(for='statuses') Status&nbsp;
+        select.form-control(name='statuses', ng-model='search.status',
           ng-options='s.name for s in util.statuses()')
           option(value='') Any
-      label.control-label(for='number') Number:&nbsp;
-        input(type='text', ng-model='search.number')
+      label.control-label(for='number') Number&nbsp;
+        input.form-control(type='text', ng-model='search.number')
   div.issue-links
     a(href='issues/create') New issue...
 div(ng-show='loading') Loading issues...
