@@ -58,6 +58,6 @@ module.exports = function (app) {
     .post('/api/cards', api.card)
     .post('/api/cards/:idCard/labels', api.cardLabel)
     .post('/api/cards/:idCard/attachments', api.attachment)
-    .post('/api/cards/:idCard/comments', api.cardComments)
+    .post('/api/cards/:idCard/comments', api.postComment)
     .get('*', api.index);
 };
