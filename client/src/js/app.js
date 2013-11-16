@@ -29,6 +29,11 @@ function Config ($routeProvider, $locationProvider) {
       templateUrl: '/partials/issueList.tpl.html',
       controller: 'IssueListCtrl',
       resolve: resolveOpts
+    })
+    .when('/products/:productId/issues/:idShort', {
+      templateUrl: '/partials/issue.tpl.html',
+      controller: 'IssueCtrl',
+      resolve: resolveOpts
     });
   $locationProvider.html5Mode(true);
 }
