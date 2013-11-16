@@ -1,7 +1,7 @@
 angular.module('trelloLite').directive('commenter', Commenter);
 
-Commenter.$inject = ['$http', 'currentLogin', 'LOGIN_PREFIX'];
-function Commenter ($http, currentLogin, LOGIN_PREFIX) {
+Commenter.$inject = ['$http'];
+function Commenter ($http) {
   return {
     restrict: 'AC',
     templateUrl: '/partials/commenter.tpl.html',
@@ -24,9 +24,8 @@ function Commenter ($http, currentLogin, LOGIN_PREFIX) {
           scope.submitting = true;
           scope.submitText = wait;
 
-          $http.post('/api/cards/' + scope.issueId + '/comments', {
-            text: scope.comment + LOGIN_PREFIX + currentLogin
-            }).success(function (data) {
+          $http.post('/api/cards/' + scope.issueId + '/comments', { text: scope.comment })
+            .success(function (data) {
               scope.comments.unshift(data);
               scope.submitting = false;
               scope.submitText = save;
