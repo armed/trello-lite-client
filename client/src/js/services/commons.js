@@ -1,7 +1,7 @@
 angular.module('trelloLite').service('Commons', Commons);
 
-Commons.$inject = ['$filter', 'Statuses', 'Products'];
-function Commons ($filter, Statuses, Products, loginTag) {
+Commons.$inject = ['$filter', 'Statuses', 'Products', 'LOGIN_PREFIX'];
+function Commons ($filter, Statuses, Products, LOGIN_PREFIX) {
   var simpleDate = $filter('simpleDate');
 
   return {
@@ -72,7 +72,7 @@ function Commons ($filter, Statuses, Products, loginTag) {
     },
     extractText: function (dataText) {
       if (dataText) {
-        var index = dataText.lastIndexOf(loginTag);
+        var index = dataText.lastIndexOf(LOGIN_PREFIX);
 
         if (~index) {
           return dataText.substring(0, index);
@@ -82,10 +82,10 @@ function Commons ($filter, Statuses, Products, loginTag) {
     },
     extractLogin: function (dataText) {
       if (dataText) {
-        var index = dataText.lastIndexOf(loginTag);
+        var index = dataText.lastIndexOf(LOGIN_PREFIX);
 
         if (~index) {
-          return dataText.substring(index + loginTag.length - 1,
+          return dataText.substring(index + LOGIN_PREFIX.length - 1,
             dataText.length).trim();
         }
       }

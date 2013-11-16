@@ -1,5 +1,6 @@
 angular.module('trelloLite', ['ngSanitize', 'ngRoute'])
-  .config(Config);
+  .config(Config)
+  .constant('LOGIN_PREFIX', '\n\n---\n');
 
 Config.$inject = ['$routeProvider', '$locationProvider'];
 function Config ($routeProvider, $locationProvider) {
