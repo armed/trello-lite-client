@@ -8,18 +8,12 @@ function IssueCtrl ($scope, $http, $routeParams, Members, Commons) {
   $http.get(['/api/boards/', $routeParams.productId, '/cards/', $routeParams.idShort].join(''))
     .success(function (data) {
       $scope.issue = data;
-      $scope.comments = [];
-      $scope.attachments = [];
+      $scope.attachments = data.attachments;
       $scope.loading = false;
+      $scope.attachmentUrl = '/api/cards/' + data.id + '/attachment';
 
-      $scope.attachmentUrl = '/api/cards/' + $scope.issue.id + '/attachment';
-
-      _.forEach($scope.issue.actions, function (action) {
-        if (isAttach(action)) {
-          $scope.attachments.push(action);
-        } else if (isComment(action) || isCreate(action) || isStatus(action)) {
-          $scope.comments.push(action);
-        }
+      $scope.comments = _.filter(data.actions, function (action) {
+        return isComment(action) || isCreate(action) || isStatus(action);
       });
     });
 

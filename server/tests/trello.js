@@ -207,7 +207,7 @@ tests.proxy = {
 
     request.get = function (url) {
       test.strictEqual(url, t('boards/board123/cards/short123?actions=createCard,',
-        'addAttachmentToCard,commentCard,updateCard&key=someKey&token=tok'));
+        'commentCard,updateCard&attachments=true&key=someKey&token=tok'));
       test.done();
     };
 

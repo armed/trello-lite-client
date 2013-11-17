@@ -1,28 +1,28 @@
 div(ng-show='loading') Loading issue...
 h4(ng-show='!loading') {{issueId(issue)}}: {{issue.name}}
-table.table.table-condensed.table-striped(ng-show='!loading')
-  tr.issue-header
-    th.issue-status Status
-    th.issue-priority Priority
-    th.issue-create-date Created
-  tr.issue
-    td.issue-status {{util.issueStatus(issue)}}
-    td.issue-priority
-      span.label(ng-class='util.issuePriorityClass(issue)').
-        {{util.issuePriorityName(issue)}}
-    td.issue-create-date {{util.issueSimpleDate(issue)}}
+div
+  table.table.table-condensed.table-striped(ng-show='!loading')
+    tr.issue-header
+      th.issue-status Status
+      th.issue-priority Priority
+      th.issue-create-date Created
+    tr.issue
+      td.issue-status {{util.issueStatus(issue)}}
+      td.issue-priority
+        span.label(ng-class='util.issuePriorityClass(issue)').
+          {{util.issuePriorityName(issue)}}
+      td.issue-create-date {{util.issueSimpleDate(issue)}}
 
-.row(ng-show='issue.desc')
+div(ng-show='issue.desc')
   pre.well.issue-body {{extractText(issue.desc)}}
-.row(ng-show='attachments.length > 0')
+.attachments(ng-show='attachments.length > 0')
   .attachment(ng-repeat='a in attachments')
-    i.icon-download-alt &nbsp;
-    a(href='{{a.data.attachment.url}}', target='new') {{a.data.attachment.name}}
-.row(ng-show='!loading')
-  .row.uploader(attachments='attachments', url='/api/cards/{{issue.id}}/attachments')
-  .row.commenter(comments='comments', issue-id='{{issue.id}}')
-.row(ng-show='noComments()') No comments
-.row(ng-show='hasComments()')
+    i.glyphicon.glyphicon-cloud-download&nbsp;
+    a(href='{{a.url}}', target='new') {{a.name}} ({{a.bytes | fileSize}})
+.uploader(ng-show='!loading', attachments='attachments', url='/api/cards/{{issue.id}}/attachments')
+.commenter(ng-show='!loading', comments='comments', issue-id='{{issue.id}}')
+div(ng-show='noComments()') No comments
+div(ng-show='hasComments()')
   .comments(ng-repeat='comment in comments')
     .member {{memberName(comment)}}
       span.time

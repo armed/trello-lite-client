@@ -102,7 +102,7 @@ _.extend(Proxy.prototype, {
   getCard: function (req, res) {
     var p = req.params;
     var u = this._createBoardUrl(p.idBoard, urljoin('cards/' + p.idShort,
-      '?actions=createCard,addAttachmentToCard,commentCard,updateCard'));
+      '?actions=createCard,commentCard,updateCard&attachments=true'));
     proxify(req, res, u);
   },
   createCard: function (req, res) {
