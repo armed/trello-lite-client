@@ -1,0 +1,8 @@
+div(ng-repeat='file in model.files')
+  span(ng-show='!file.sent') {{file.name}}&nbsp;
+  span.label.label-warning(ng-show='file.error') {{file.error}}
+  span.label.label-primary(ng-show='file.sending') {{model.percentage}}%
+div
+  a(href='#', ng-click='chooseFile()') Attach file...&nbsp;
+  span.system.small (max 2Mb)
+  input(type='file', ng-model='files')
