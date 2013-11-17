@@ -11,37 +11,37 @@ var api = {
     res.send(res.locals.version);
   },
   members: function (req, res) {
-    Proxy.getMembers(req, res)
+    Proxy.getMembers(req, res);
   },
   boards: function (req, res) {
-    Proxy.getBoards(req, res)
+    Proxy.getBoards(req, res);
   },
   lists: function (req, res) {
-    Proxy.getLists(req, res)
+    Proxy.getLists(req, res);
   },
   cardsInList: function (req, res) {
-    Proxy.getCardsInList(req, res)
+    Proxy.getCardsInList(req, res);
   },
   cardsInBoard: function (req, res) {
-    Proxy.getCardsInBoard(req, res)
+    Proxy.getCardsInBoard(req, res);
   },
   card: function (req, res) {
-    Proxy.getCard(req, res)
+    Proxy.getCard(req, res);
   },
   createCard: function (req, res) {
-    Proxy.createCard(req, res)
+    Proxy.createCard(req, res);
   },
   cardLabel: function (req, res) {
-    Proxy.setCardLabel(req, res)
+    Proxy.setCardLabel(req, res);
   },
   attachment: function (req, res) {
-    Proxy.addAttachment(req, res)
+    Proxy.addAttachment(req, res);
   },
   cardComments: function (req, res) {
-    Proxy.getCardComments(req, res)
+    Proxy.getCardComments(req, res);
   },
   postComment: function (req, res) {
-    Proxy.postCardComment(req, res)
+    Proxy.postCardComment(req, res);
   }
 };
 
