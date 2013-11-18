@@ -26,6 +26,5 @@ div(ng-show='hasComments()')
   .comments(ng-repeat='comment in comments')
     .member {{memberName(comment)}}
       span.time
-        span(time-label='{{comment.date}}')
-        span.system {{comment.date | simpleDate}}
+        span.system(title='{{comment.date | simpleDate}}') {{comment.date | simpleTime}}
     pre.text(ng-class='{system: isSystem(comment)}') {{commentBody(comment)}}
