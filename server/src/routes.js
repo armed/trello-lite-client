@@ -55,7 +55,7 @@ module.exports = function (app) {
     .get('/api/lists/:idList/cards', api.cardsInList)
     .get('/api/boards/:idBoard/cards/:idShort', api.card)
     .get('/api/cards/:idCard/comments', api.cardComments)
-    .post('/api/cards', api.card)
+    .post('/api/cards', api.createCard)
     .post('/api/cards/:idCard/labels', api.cardLabel)
     .post('/api/cards/:idCard/attachments', api.attachment)
     .post('/api/cards/:idCard/comments', api.postComment)
