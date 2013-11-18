@@ -19,7 +19,7 @@ function Config ($routeProvider, $locationProvider) {
 
   $routeProvider
     .when('/', {
-      templateUrl: '/partials/mainCtrl.tpl.html',
+      templateUrl: '/partials/main.tpl.html',
       controller: 'MainCtrl',
       resolve: {
         products: resolveOpts.products,
