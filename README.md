@@ -1,6 +1,6 @@
 Trello Lite Client
 ==================
 
-Server - nodejs proxy to trello board
+Server - nodejs proxy to trello boards
 
 Client - simple UI written in angularjs
