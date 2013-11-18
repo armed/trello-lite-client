@@ -31,6 +31,11 @@ function Config ($routeProvider, $locationProvider) {
       controller: 'IssueListCtrl',
       resolve: resolveOpts
     })
+    .when('/products/:productId/issues/create', {
+      templateUrl: '/partials/newIssue.tpl.html',
+      controller: 'NewIssueCtrl',
+      resolve: resolveOpts
+    })
     .when('/products/:productId/issues/:idShort', {
       templateUrl: '/partials/issue.tpl.html',
       controller: 'IssueCtrl',
