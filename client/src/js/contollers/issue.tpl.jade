@@ -17,7 +17,7 @@ div(ng-show='issue.desc')
   pre.issue-body {{extractText(issue.desc)}}
 .attachments(ng-show='attachments.length > 0')
   .attachment(ng-repeat='a in attachments')
-    i.glyphicon.glyphicon-cloud-download&nbsp;
+    i.glyphicon.glyphicon-cloud-download
     a(href='{{a.url}}', target='new') {{a.name}} ({{a.bytes | fileSize}})
 .uploader(ng-show='!loading', attachments='attachments', url='/api/cards/{{issue.id}}/attachments')
 .commenter(ng-show='!loading', comments='comments', issue-id='{{issue.id}}')
