@@ -14,7 +14,7 @@ div
       td.issue-create-date {{util.issueSimpleDate(issue)}}
 
 div(ng-show='issue.desc')
-  pre.well.issue-body {{extractText(issue.desc)}}
+  pre.issue-body {{extractText(issue.desc)}}
 .attachments(ng-show='attachments.length > 0')
   .attachment(ng-repeat='a in attachments')
     i.glyphicon.glyphicon-cloud-download&nbsp;

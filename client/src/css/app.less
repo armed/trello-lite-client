@@ -1,4 +1,20 @@
-@commenter-anim: height ease-in-out 85ms;
+.transition(@attr:all, @ease:ease-out, @duration:0.2s) {
+  -webkit-transition: @attr @duration @ease;
+  -moz-transition: @attr @duration @ease;
+  -o-transition: @attr @duration @ease;
+  transition: @attr @duration @ease;
+}
+
+.border-radius(@radius:2px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.commenter-anim {
+  .transition(height, ease-in-out, 85ms);
+}
 
 [ng\:cloak],
 [ng-cloak],
@@ -39,7 +55,7 @@
   margin: 0 0 10px 0;
   border: 1px #ddd solid;
   padding: 8px;
-  border-radius: 4px;
+  .border-radius(4px);
   .member {
     font-weight: bold;
   }
@@ -50,7 +66,7 @@
   }
   .text {
     border: none;
-    border-radius: 0;
+    .border-radius(0);
     font: inherit;
     padding-top: 10px;
     border-top: 1px solid #cfcfcf;
@@ -73,7 +89,7 @@
   color: #939393;
   height: 36px;
   width: 100%;
-  transition: @commenter-anim;
+  .commenter-anim;
 }
 
 .commenter-submit {
@@ -83,7 +99,7 @@
 
 .commenter {
   height: 40px;
-  transition: @commenter-anim;
+  .commenter-anim;
   margin-top: 10px;
   margin-bottom: 4px;
   &.focus {
@@ -107,7 +123,7 @@
   background-color: #f3f3f3;
   display: table;
   padding: 4px;
-  border-radius: 3px;
+  .border-radius(3px);
   border: 1px solid #eee;
   float: left;
   font-size: 85%;
