@@ -25,6 +25,6 @@ div(ng-show='!loading && issues.length > 0')
        a(href='issues/{{issue.idShort}}') {{issue.name}}
       td.issue-status {{util.issueStatus(issue)}}
       td.issue-create-date
-        span.label(ng-class='util.issuePriorityClass(issue)')
-          | {{util.issuePriorityName(issue)}}
+        span.label(ng-class='util.issuePriorityClass(issue)').
+          {{util.issuePriorityName(issue)}}
       td {{util.issueSimpleDate(issue)}}
