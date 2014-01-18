@@ -1,55 +1,39 @@
-var libs = [
-  'lodash',
-  'jquery',
-  'moment',
-  'bootstrap',
-  'angular',
-  'angular-route',
-  'angular-sanitize'
-];
-
-function vendorFile (file) {
+function vGlob(file) {
   return 'vendor/**/' + file;
 }
 
-function vendorLibs (ext) {
-  return libs.map(function (l) {
-    return vendorFile(l + ext);
-  });
-}
-
 module.exports = {
-  buildDir: 'dist',
-
   pkg: require('./package.json'),
+  dist: 'dist',
+  vendor: {
+    fonts: vGlob('glyphicons-halflings-regular.*'),
+    less: vGlob('bootstrap.less'),
+    js: [
+      'lodash',
+      'jquery',
+      'moment',
+      'bootstrap',
+      'angular',
+      'angular-route',
+      'angular-sanitize'
+    ].map(function (l) {
+      return vGlob(l + '.min.js');
+    })
+  },
+  app: {
+    html: 'src/index.jade',
+    partials: 'src/**/*.tpl.jade',
+    js: ['app.prefix', 'src/js/**/*.js', 'app.suffix'],
+    less: 'src/css/**/*.less'
+  },
 
-  vendorJs: vendorLibs('.min.js'),
-
-  vendorDevJs: vendorLibs('.js'),
-
-  vendorCss: [
-    vendorFile('bootstrap.min.css')
-  ],
-
-  vendorFonts: [
-    vendorFile('glyphicons-halflings-regular.*')
-  ],
-
-  htmlFiles: [
-    'src/index.jade'
-  ],
-
-  partials: [
-    'src/**/*.tpl.jade'
-  ],
-
-  appJs: 'src/**/*.js',
-
-  concatAppJs: [
-    'app.prefix',
-    '<%= appJs %>',
-    'app.suffix'
-  ],
-
-  appLess: 'src/css/**/*.less'
+  cssmin: {
+    keepSpecialComments: 0
+  },
+  flatten: {
+    css: {newPath: 'css'},
+    js: {newPath: 'js'},
+    fonts: {newPath: 'fonts'},
+    partials: {newPath: 'partials'}
+  }
 };
