@@ -53,7 +53,7 @@ g.task('js', function () {
 
 g.task('jade', function () {
   g.src(conf.app.html)
-    .pipe(jade({data: {dev: true, version: Number(new Date())}}))
+    .pipe(jade(conf.jade.dev))
     .pipe(flatten())
     .pipe(g.dest(conf.dist));
   g.src(conf.app.partials)

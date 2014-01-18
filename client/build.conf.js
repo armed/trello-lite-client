@@ -34,6 +34,11 @@ module.exports = {
     css: {newPath: 'css'},
     js: {newPath: 'js'},
     fonts: {newPath: 'fonts'},
-    partials: {newPath: 'partials'}
+    partials: {newPath: 'partials'},
+    jade: {
+      dev: {
+        data: {dev: true, version: Number(new Date())}
+      }
+    }
   }
 };
